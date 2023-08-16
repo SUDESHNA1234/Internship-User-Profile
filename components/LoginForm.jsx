@@ -46,7 +46,7 @@ export default function LoginForm() {
     <>
    
     <div className="relative w-full h-screen">
-          <Image src={img} layout="fill" className="opacity-80" />
+          <Image src={img} alt="Login" layout="fill" className="opacity-80" />
     
           <div className="absolute inset-0 grid place-items-center">
             <div className="shadow-2xl p-6 rounded-lg border-t-4 bg-white">

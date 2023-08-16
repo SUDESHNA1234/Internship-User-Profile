@@ -60,20 +60,6 @@ export default function RegisterForm() {
          return;
       }
        try {
-        //  const resUserexits=await fetch('Api/userexits',{
-        //     method: "POST",
-           
-        //     headers:{
-        //         'Content-Type': 'application/json;charset=utf-8;',
-        //     },
-        //     body: JSON.stringify(email)
-               
-        //  })
-        //  const {user}=await resUserexits.json();
-        //   if (user){
-        //     seterror("user already exists");
-        //     return ;
-        //   }
        const res=  await fetch('api/register',{
             method: "POST",
            
@@ -81,9 +67,7 @@ export default function RegisterForm() {
                 'Content-Type': 'application/json;charset=utf-8;',
             },
             body: JSON.stringify(data)
-               
-         
-       }); 
+             }); 
        
        if(res.ok){
         alert(Swal({
@@ -181,7 +165,7 @@ export default function RegisterForm() {
     }}
     />
    
-  <Image src={img} className="w-full h-full"></Image>
+  <Image src={img} alt="Register" className="w-full h-full"></Image>
   </div>
 
   <div class="col-span-2">
