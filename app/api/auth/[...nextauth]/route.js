@@ -15,8 +15,8 @@ export const authOptions = {
 
         try {
           await connectMongoDB();
-          const user = await User.findOne({ email });
-
+          const user = await User.findOne({ email});
+         
           if (!user) {
             return null;
           }
@@ -28,12 +28,14 @@ export const authOptions = {
           }
 
           return user;
+         
         } catch (error) {
           console.log("Error: ", error);
         }
       },
     }),
   ],
+  
   session: {
     strategy: "jwt",
   },

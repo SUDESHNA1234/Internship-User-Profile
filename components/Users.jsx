@@ -1,12 +1,12 @@
 'use client';
 import { useEffect, useState } from "react"
-import { useRouter } from "next/router";
+
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 export default function Users() {
   const { data: session } = useSession();
-
+ 
   const [users,setusers]=useState("");
  
   useEffect(() => {
@@ -18,11 +18,12 @@ export default function Users() {
         }
         const data = await response.json();
         setusers(data);
+       
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     }
-    console.log(users);
+   
     Getusers();
   }, []);
   
@@ -84,7 +85,7 @@ export default function Users() {
             <div>
           Name: <span className="font-bold">{session?.user?.name}</span>
         </div>
-        {users && (
+        
     <div>
       <div>
         Name: <span className="font-bold">{users?.name}</span>
@@ -94,7 +95,7 @@ export default function Users() {
       </div>
       {/* Display other user details based on schema */}
     </div>
-  )}
+
             </div>
           </div>
         </div>

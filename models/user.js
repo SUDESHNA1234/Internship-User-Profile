@@ -38,7 +38,8 @@ const userSchema = new Schema(
         college: String,
         graduationYear: String,
       },
-    ]
+    ],
+    connections: [{ type: Schema.Types.ObjectId, ref: "User" }]  //to store users connections ids 
   },
   { timestamps: true }
 );

@@ -24,7 +24,7 @@ export default function RegisterForm() {
   const[graduationYear,setgraduationYear]=useState("");
   const [photo, setPhoto] = useState(null);
   const [error ,seterror]=useState("");
- 
+  const router = useRouter();
   // const handleSkills = (event) => {
   //   const {
   //     target: { value },
@@ -39,7 +39,7 @@ export default function RegisterForm() {
       e.preventDefault();
       const experience = [{ company, title }];
       const education = [{ degree, college, graduationYear }];
-     
+      const connections = [];
 
 
 
@@ -51,7 +51,7 @@ export default function RegisterForm() {
         about,
         experience,
         education,
-       
+        connections
       };
       
       if(!data.name || !data.email || !data.password || !data.phone || !data.about 
@@ -86,17 +86,16 @@ export default function RegisterForm() {
        }); 
        
        if(res.ok){
+        alert(Swal({
+          title: "Information  added Successfully",
+         
+          icon: "success",
+           
+          button:"OK"
+        }));
         const form =e.target;
         form.reset();
-      alert(Swal({
-        title: "Information  added Successfully",
-       
-        icon: "success",
-         
-        button:"OK"
-      }));
-       }else{
-        console.log("User registration failed")
+        router.push("/");
        }
      }catch (error) {
         console.log("User registration failed")

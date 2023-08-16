@@ -1,18 +1,26 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState,useEffect} from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import img from './Images/sky.jpg';
+
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    // Simulate loading delay
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -36,7 +44,8 @@ export default function LoginForm() {
 
   return (
     <>
-     <div className="relative w-full h-screen">
+   
+    <div className="relative w-full h-screen">
           <Image src={img} layout="fill" className="opacity-80" />
     
           <div className="absolute inset-0 grid place-items-center">
@@ -58,6 +67,8 @@ export default function LoginForm() {
             </div>
           </div>
         </div>
+   
+    
     </>
   );
 }

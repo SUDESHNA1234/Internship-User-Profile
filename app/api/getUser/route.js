@@ -1,33 +1,31 @@
-// Example API endpoint in pages/api/getUser.js
+// pages/api/getUser.js
+
 import { getSession } from "next-auth/react";
-
-
-
 import User from "@/models/user";
 import { connectMongoDB } from "@/lib/mongodb";
+import { NextResponse } from "next/server";
 
-
-  
-export default async function GET(req) {
-  if (req.method !== "GET") {
-    return NextResponse.json({ message: "Method not allowed" }, { status: 500 });
-  }
-
-  await connectMongoDB();
-  const session = await getSession({ req });
-  const { userId } = req.query;
-  if (!session) {
-    return NextResponse.json({ message: "User  not registered." }, { status: 401 });
-  }
+export  async function GET(req) {
   try {
-    const user = await User.findById(userId);
-    if (!user) {
-      return NextResponse.json({ message: "User not found." }, { status: 401 });
+    await connectMongoDB();
+    const session = await getSession({ req });
+
+    if (!session) {
+      return NextResponse.json(
+        { message: "User not registered." },
+        { status: 401 }
+      );
     }
 
-    return res.json(user);
+     const userId = session.user.email;
+      
+    const user = await User.findById({userId });
+
+    if (!user) {
+      return NextResponse.json({ message: "User not found." }, { status: 404 });
+    } 
   } catch (error) {
-    console.error("Error fetching user data:", error);
+    console.log(error);
     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
   }
 }
